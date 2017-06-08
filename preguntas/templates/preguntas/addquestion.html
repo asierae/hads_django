@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!-- //custom-theme -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'preguntas/css/styleR.css' %}" />
+<!-- js -->
+<script src="{% static 'preguntas/js/jquery-2.1.4.min.js' %}"></script>
+<!-- //js -->
+<!-- font-awesome-icons -->
+<!-- //font-awesome-icons -->
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+
+<script src="{% static 'preguntas/js/jquery.vide.min.js' %}"></script>
+<!-- banner -->
+	<div data-vide-bg="video/appointment"
+>		<div class="center-container">
+			<div class="main">
+				<h1 class="w3layouts_head">Añade tu Pregunta</h1>
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if log %}<p><strong>{{ log }}</strong></p>{% endif %}
+					<div class="w3layouts_main_grid">
+
+	
+						<form method="post" class="w3_form_post" enctype="multipart/form-data">
+						{% csrf_token %}
+						        {% for field in form %}
+						        {{ field.errors }}
+						        <div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+       							 <label>{{ field.label_tag }} <i>:</i></label>
+       							 {{ field }}
+    
+       							</span>
+							</div>
+        						{% endfor %}
+							<div class="w3_main_grid">
+								<div class="w3_main_grid_right">
+									<input type="submit" value="Añadir Pregunta">
+								</div>
+							</div>
+						</form>
+					</div>
+				<div class="w3layouts_copy_right">
+					<div class="container">
+						<p>© 2017 Proyecto HADS</a></p>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+<!-- //footer -->
+{% endblock %}

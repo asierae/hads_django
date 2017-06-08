@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!-- //custom-theme -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/styleR.css' %}" />
+<!-- js -->
+<script src="{% static 'accounts/js/jquery-2.1.4.min.js' %}"></script>
+<!-- //js -->
+<!-- font-awesome-icons -->
+<!-- //font-awesome-icons -->
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+
+<script src="{% static 'accounts/js/jquery.vide.min.js' %}"></script>
+  <script type=”text/javascript”>
+      // needed when making post requests in Django
+      // we’ll use this for the ajax request in script.js
+      window.CSRF_TOKEN = “{{ csrf_token }}”;
+    </script>
+ <script>
+ function prueba(email){
+ 	      var username = email;
+
+      $.ajax({
+        url: '/account/validate_username/',
+        data: {
+          'username': username,
+          'csrfmiddlewaretoken': window.CSRF_TOKEN
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+          	alert('Usuario Registrado');
+            $('#error').html("<h4>Usuario ya registrado<h4/>");
+          }
+          else{
+          	alert('Usuario disponible para el registro');
+          	$('#error').html("<h4>Usuario no registrado<h4/>");
+          }
+        }
+      });
+ }
+  </script>
+<!-- banner -->
+	<div data-vide-bg="video/appointment"
+>		<div class="center-container">
+			<div class="main">
+				<h1 class="w3layouts_head">Formulario de Registro</h1>
+				<div id="error"></div>
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if log %}<p><strong>{{ log }}</strong></p>{% endif %}
+					<div class="w3layouts_main_grid">
+
+	
+						<form method="post" class="w3_form_post" enctype="multipart/form-data">
+						{% csrf_token %}
+						        {% for field in form %}
+						        {{ field.errors }}
+						        <div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+       							 <label>{{ field.label_tag }} <i>:</i></label>
+       							 {{ field }}
+    
+       							</span>
+							</div>
+        						{% endfor %}
+
+							<!-- <div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Usuario<i>:</i></label>
+									<input type="text" name="username" placeholder="Nombre" required="">
+								</span>
+							</div>
+							<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Nombre<i>:</i></label>
+									<input type="text" name="first_name" placeholder="Nombre Apellido" required="">
+								</span>
+							</div>
+								<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Apellido<i>:</i></label>
+									<input type="text" name="last_name" placeholder="Nombre Apellido" required="">
+								</span>
+							</div>
+							<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Email <i>:</i></label>
+									<input type="text" name="email" placeholder="ejemplo@gmail.com" required="">
+								</span>
+							</div>
+							<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Password <i>:</i></label>
+									<input type="password" name="password" placeholder="Password" required="">
+								</span>
+							</div>
+							<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Repetir Pass <i>:</i></label>
+									<input type="password" name="password2" placeholder="Password" required="">
+								</span>
+							</div> -->
+<!-- 							<div class="w3_agileits_main_grid w3l_main_grid">
+								<span class="agileits_grid">
+									<label>Avatar<i>:</i></label>
+									<input type="file" name="image">
+								</span>
+							</div -->
+							
+							<div class="w3_main_grid">
+								<div class="w3_main_grid_right">
+									<input type="submit" value="Registrarme">
+								</div>
+							</div>
+						</form>
+					</div>
+				<div class="w3layouts_copy_right">
+					<div class="container">
+						<p>© 2017 Proyecto HADS</a></p>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+<!-- //footer -->
+{% endblock %}

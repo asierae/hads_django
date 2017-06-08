@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+        aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="account/login" user.username %}">
+          Mis Preguntas</a></li>
+      <li><a href="/account/logout" %}">Logout</a></li>
+    </ul>
+  </li>
+</ul>
+{% else %}
+
+<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" type="text/css" media="all" /> <!-- Style-CSS --> 
+<link rel="stylesheet" href="{% static 'accounts/css/font-awesome.css' %}"> <!-- Font-Awesome-Icons-CSS -->
+<!-- //css files -->
+<!-- web-fonts -->
+<link href="//fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,vietnamese" rel="stylesheet">
+<!-- //web-fonts -->
+
+<div data-vide-bg="video/social2">
+	<div class="center-container">
+		<!--header-->
+		<!--//header-->
+		<!--main-->
+		<div class="main-content-agile">
+			<div class="wthree-pro">
+				<h2>Inicia sesión</h2>
+			{%if msj%}
+			<h2>{{msj}}</h2>
+			{%endif%}
+			</div>
+
+			<div class="sub-main-w3">	
+				<form class="navbar-form navbar-right" role="form" action="{% url "accounts:login" %}" method="post" accept-charset="utf-8">
+					<input placeholder="E-mail" name="username" type="text" required="">
+					<span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+					<input  placeholder="Password" name="password" type="password" required="">
+					<span class="icon2"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+					<div class="rem-w3">
+						<span class="check-w3"><input type="checkbox" />Remember Me</span>
+						<a href="#">Forgot Password?</a>
+						<div class="clear"></div>
+					</div>
+					<div class="navbar-right social-icons"> 
+							<ul>
+								<li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
+								<li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
+								<li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li> 
+								<li><a href="#" class="fa fa-pinterest icon-border rss"> </a></li>
+							</ul>  
+						</div>
+						  {% csrf_token %}
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer-->
+		<div class="footer">
+			<p>&copy; Formulario Inicio de Sesión</a></p>
+		</div>
+		<!--//footer-->
+	</div>
+</div>
+<!-- js -->
+<script type="text/javascript" src="{% static 'accounts/js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'accounts/js/jquery.vide.min.js' %}"></script>
+<!-- //js -->
+
+{% endif %}
+{% endblock %}
